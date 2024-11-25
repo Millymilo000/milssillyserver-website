@@ -4,7 +4,6 @@ Sorry for the horrible github page, will probably update in the future.
 
 ## stuff that needs to be done
 * Fix typos, I'm sure I made a lot, mainly in `guide/index.html`
-* Finish `wiki/brewery.html`
 * Finish the other wiki pages
 * Make more wiki pages.
 

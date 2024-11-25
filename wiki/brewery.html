@@ -25,11 +25,11 @@
     <main>
         <h1>Brewery</h1>
         <div class="msgBox msgBoxRed"><strong>Important</strong><br>We do not support drinking alcholic drinks in real life. This plugin is just here to add a fun side thing to do.</div>
-        <div class="msgBox msgBoxGreen"><strong>Work in progress</strong><br>hey there im still working on this page! more instructions will come in the future!</div>
         <p>In this server, we have a fun plugin that lets you brew drinks. The plugin we use to do this is <a href="https://github.com/DieReicheErethons/Brewery/" class="external">DieReicheErethons brewery plugin <span class="subText">github</span></a></p>
         <button type="button" class="collapsible largeButton toc">Contents</button>
         <div class="content">
             <ul>
+                <li><a href="#recipes">Recipes</a></li>
                 <li><a href="#brewing">Brewing</a>
                     <ul>
                         <li><a href="#fermenting">Fermenting</a></li>
@@ -37,11 +37,8 @@
                         <li><a href="#aging">Ageing</a></li>
                     </ul>
                 </li>
-                <li><a href="#recipes">Recipes</a></li>
             </ul>
         </div>
-        <h2 id="brewing">Getting started with brewing</h2>
-        <p>Work in progress! Come back later!</p>
         <h2 id="recipes">Recipes</h2>
         <table><!--If you found the actual recipes in the server, do not replace the vague recipes here. They are vague on purpose!-->
             <tr>
@@ -214,6 +211,51 @@
             </tr>
         </table>
         <p class="subText">Note: These recipes are modified from the original recipes provided by the plugin, looking at another wikis recipes, or the config.yml the plugin provides, will not give exact recipes.</p>
+        <h2 id="brewing">Getting started with brewing</h2>
+        <p>A lot of this page was taken from the <a class="external" href="https://github.com/DieReicheErethons/Brewery/wiki/Usage">original plugins usage wiki page</a></p>
+        <p>To brew recipes in this plugin you will use other stations rather than the vanilla Brewing Stand. These recipes can be difficult and time consuming.
+            <br>Depending on the recipe it may or may not require some steps.
+        </p>
+        <h3 id="fermenting">Fermenting</h3>
+        <p>The first step in any recipe has the fermenting of fresh Ingredients.</p>
+        <ol>
+            <li>Place Cauldron over a Fire or other heat source</li>
+            <li>Fill it with water</li>
+            <li>Add Ingredients with a rightclick</li>
+            <li>Wait a few minutes while they ferment</li>
+            <li>Fill in glass bottles</li>
+        </ol>
+        <img src="../media/cauldronBrewery.png">
+        <p>Use a clock on a cauldron, if you want to know the time the ingredients have been fermenting.</p>
+        <h3 id="distilling">Distilling</h3>
+        <p>Some recipes don't need distilling.</p>
+        <ol>
+            <li>Put the bottle with ferment into the brewing stand</li>
+            <li>Put glowstone dust as filter on top into the brewing stand (The filter will not be consumed)</li>
+        </ol>
+        <img src="../media/brewingStandBrewery.png">
+        <h3 id="ageing">Ageing</h3>
+        <p>A custom made barrel is needed for ageing</p>
+        <h4>Small barrel &#x7c; <em>9 Slots</em></h4>
+        <p>Use 8 wooden stairs to build a barrel shape.
+            <br>Place a Sign on the lower right side and write "Barrel" in the upper Line:
+        </p>
+        <img src="../media/smallBarrelSide.png"><img src="../media/smallBarrel.png">
+        <img src="../media/smallBarrels.png">
+        <p>Message "Barrel created" should appear.</p>
+        <h4>Big Barrel &#x7c; <em>27 Slots</em></h4>
+        <p>Use 5 Fences, 16 Wooden stairs, and 18 wood planks to build a barrel shape. Attach a Spigot (Fence) and a Sign that has "Barrel" written on it:</p>
+        <img src="../media/barrelSide.png"><img src="../media/barrel.png">
+        <p>Message "Barrel created" should appear
+            <br><strong>You may remove the Sign from the Big Barrel after creating it.</strong>
+        </p>
+        <hr>
+        <p>Open the Barrel by clicking on it.</p>
+        <ul>
+            <li>Put the Bottles into the Barrels for aging.</li>
+            <li>For every Minecraft Day, the brews will age a year.</li>
+            <li>Depending on the Recipe, the Type of wood used for building the barrel may alter the quality of the aged Brew.</li>
+        </ul>
     </main>
     <footer><button class="styleToggle" id="styleToggle"></button></footer>
     <script src="../scripts/main.js"></script>

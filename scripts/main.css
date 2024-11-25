@@ -142,3 +142,6 @@ span a {
 table, th, td {
     border: 2px rgb(71, 71, 71) solid;
 }
+main > img {
+    max-width: 90%;
+}
