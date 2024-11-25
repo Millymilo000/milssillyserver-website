@@ -1,0 +1,36 @@
+.collapsible {
+	background: rgba(128, 128, 128, 0.2);
+	cursor: pointer;
+	padding: inherit;
+	border: none;
+	border-bottom: solid rgb(80, 80, 80);
+	text-align: left;
+	font-size: inherit;
+	color: inherit;
+	text-decoration: underline;
+}
+.largeButton {
+	font-size: 19pt;
+	padding: 15px;
+	margin-left: 15px;
+	width: 95%;
+}
+.content {
+	padding: 0 15px;
+	width: 95%;
+	margin-left: 15px;
+	display: none;
+	overflow: hidden;
+	background-color: rgba(93, 93, 93, 0.2);;
+	margin-bottom: 5px;
+}
+.toc::before{
+    background-image: url(../media/toc.svg);
+    background-repeat: no-repeat;
+    background-size: 17px;
+    display: inline-block;
+    width: 25px;
+    height: 16px;
+    filter: invert(100%) sepia(1%) saturate(6714%) hue-rotate(197deg) brightness(121%) contrast(99%);
+    content: "";
+}

@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>guide - mils silly server</title>
+    <link rel="shortcut icon" href="../media/cat-ohmygodwhatthehell.ico" type="image/x-icon">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+    <link rel="stylesheet" href="../scripts/main.css">
+    <link rel="stylesheet" href="../scripts/collapse.css">
+    <link rel="stylesheet" href="../scripts/guide.css">
+</head>
+<body>
+    <div class="topimg">&nbsp;</div>
+    <nav>
+        <div><a href="../index.html">Home</a></div>
+        <div><a id="map" href="#">Map</a></div>
+        <div><a href="../rules.html">Rules</a></div>
+        <div class="play"><a href="../play/index.html">Play!</a></div>
+        <div><a href="../blog.html">Blog</a></div>
+        <div><a href="../wiki/index.html">Wiki</a></div>
+        <div><a href="../school.html">hi schools please click this</a></div>
+    </nav>
+    <br style="margin-top: 20px;">
+    <main>
+        <h1>Server hosting guide</h1>
+        <p>This guide will guide you through making you're own self hosted EaglercraftX server, this will be the same way I host my server, there is other ways you can also host it but this is the way I personally suggest.
+            <br>Please make sure you read every single instruction, unless instructed to not, to make sure this guide will be helpful and not fail or lead to a lost system.
+        </p>
+        <p>Quick note, I am not responsible for any lost files or broken hardware.</p>
+        <h3>To start off here is everything you will need to follow this guide:</h3>
+        <ul>
+            <li>A spare computer with atleast 32 Gigabytes of empty storage, 4 Gigabytes of ram, and a decent CPU. <strong>For this guide we will be calling this computer, the server computer.</strong>
+                <ul>
+                    <li>I very much suggest that you use a different computer from the one you mainly use, as we want to make sure it has enough resources to run the server, and also not mess with your current setup. If you have any spare laptops or random old pcs just use one of those.</li>
+                    <li>In this guide we will be installing Ubuntu Linux Server onto this computer, so as with any new OS installation there is always a chance of losing any files on the computer already so please <strong>BACK UP ANY IMPORTANT DATA ON THE SERVER COMPUTER BEFORE FOLLOWING THIS GUIDE!!</strong></li>
+                    <li>I'm not entirely sure how well it would perform but you <em>could</em> use a raspberry Pi, I would not use a SD card as its main storage, and instead use a M.2 SSD; As the SD card slow disk speeds, will be a HUGE bottleneck that will slow down your server. You also have to know that some instructsions will be different, and as I don't have a raspberry pi to test it on, they will not be included in this guide.</li>
+                    <li>You cannot use your school issued chromebook for this</li>
+                </ul>
+            </li>
+            <li>A USB Flash drive with 4 Gigabytes of storage, or a SD Card with 4 Gigabytes of storage and an SD Card to USB adapater, or if the server computer has a dvd drive: a blank DVD that you can write to.</li>
+            <li>A Computer running Windows, Mac*, or Linux, or an android device. <strong>For this guide we will be calling this the &quot;Main computer&quot;</strong>
+                <ul><li>*: You can use a computer running mac, but as I don't have a mac computer to test this with, there are no instructions for that.</li><li>You cannot use your school issued chromebook for this either.</li></ul></li>
+            <li>
+                <strong>OPTIONAL</strong> A second level domain (like the underlined part in <u>google</u>.com, <u>minecraft</u>.net, or <u>wikipedia</u>.org)
+                <ul>
+                    <li>Needed if you want to use tunneling and use more than 1 Gigabytes a month, host a client, have a dynmap, or have a website along side you server.</li>
+                    <li>CANNOT be a subdomain</li>
+                    <li>I'd suggest going to <a class="external" href="https://www.namecheap.com/market/buynow/?filter=W3siaWQiOiJwcmljZSIsInZhbHVlIjpbMCw1XX1d">namecheap.com/market/</a>, and entering every single one into your chromebook until you find one thats not blocked.</li>
+                </ul>
+            </li>
+            <li>
+                <strong>OPTIONAL</strong> A subdomain that lets you make A records
+                <ul>
+                    <li>To use this methord you are REQUIRED to port forward, so it doesn't use tunneling.</li>
+                    <li>Can also be a second level domain</li>
+                    <li>I'd suggesting getting a free one from <a href="https://freedns.afraid.org/" class="external">freedns.afraid.org</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="txtLeft">
+            <p>An example of a workable setup, Here for this guides server computer I'll be using a 10 year old sony vaio laptop, my dad used to use it for work but he gave it to me because it was just sitting around unused.
+                <br>This laptop has a Intel Core i7-4500U CPU @ 1.80GHz, and 8 Gigabytes of ram.
+                <br>Right beside it is a SD Card to USB adapter, that will be using a micro SD card to SD card adapter.
+            </p>
+            <img class="setup" src="../media/setup.jpg">
+        </div>
+        <br>
+        <button type="button" class="collapsible largeButton toc">Contents</button>
+        <div class="content">
+            <ul>
+                <li><a href="#pt1">Part 1: Setting up the server computer OS</a>
+                    <ul>
+                        <li><a href="#pt1sec1">Section 1: Downloading Linux</a></li>
+                        <li><a href="#pt1sec2">Section 2: Installing Linux</a></li>
+                        <li><a href="#pt1sec3">Section 3: Installing Software & Setting up</a></li>
+                    </ul>
+                </li>
+                <li><a href="#pt2">Part 2: Setting up the minecraft server</a>
+                    <ul>
+                        <li><a href="#pt2sec1">Section 1: Creating the Waterfall server</a></li>
+                        <li><a href="#pt2sec2">Section 2: Creating the Minecraft server</a></li>
+                        <li><a href="#pt2sec3">Section 3: Testing</a></li>
+                        <li><a href="#pt2sec4">Section 4: Systemd services for the Minecraft server</a></li>
+                        <li><a href="#pt2sec5">Section 5: Setting up others being able to join your server</a></li>
+                    </ul>
+                </li>
+                <li><a href="#pt3">OPTIONAL but very suggested Part 3: Extra things to add & know</a>
+                    <ul>
+                        <li><a href="#pt3sec1">Section 1: I suggest adding an auth plugin to your server</a></li>
+                        <li><a href="#pt3sec2">Section 2: Tired of having to use the command line for handling file downloads and file editing?</a></li>
+                        <li><a href="#pt3sec3">Section 3: Hosting an EaglercraftX client</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <h2 id="pt1">Part 1: Setting up the server computer OS</h2>
+        <p>Personally for all server applications, I will always suggest using Linux to host them, as most server applications don't need a desktop, and operating systems like Windows or Mac waste resources on that and other things that will go unused.
+            <br>For this guide we will be using Ubuntu Linux Server</p>
+        <h3 id="pt1sec1">Section 1: Downloading Linux</h3>
+        <p>Unless said in the step, these steps will be done on the Main Computer</p>
+        <ol>
+            <li>Go to <a class="external" href="https://ubuntu.com/download/server">ubuntu.com/download/server</a>, if your server computer has a 64-bit CPU, click &quot;Download 24.04.1 LTS&quot;.
+                <ul>
+                    <li>You can find if your cpu supports 64-bit CPU multiple ways.
+                        <ul>
+                            <li>If the server computer already has an OS installed, you can look it up there. 
+                                <br>In windows if you open control panel, go to System and Security > System, and infront &quot;System Type&quot; it should say if it supports 64-bit, if not what cpu architecture it uses.
+                                <br>In linux there's usually a &quot;About this System&quot; tab in the settings app, or a CPU app that will tell you if it supports 64-bit, if not what cpu architecture it uses.
+                            </li>
+                            <li>If you're using a laptop, raspberry pi or pre-made desktop, you can search up it's model number, and you can find if it supports 64-bit, if not what cpu architecture it uses.</li>
+                            <li>If you know what CPU is inside the computer you can search it up on google, like if the CPU inside your server computer was a Intel Core i7-4500U, you could search &quot;Intel Core i7-4500 64 bit or 32 bit&quot;, and it would say if it supports 64-bit.</li>
+                        </ul>
+                    </li>
+                    <li>If the CPU in the server computer is not 64-bit or 32-bit, then you can click &quot;Alternative architectures&quot;, where other downloads will be avaliable.</li>
+                    <li>If the CPU in the server computer is 32-bit, then you can try using debian as a server from <a class="external" href="https://www.debian.org/CD/http-ftp/#mirrors">debian.org</a>, I think it might support a non graphical install but I've never messed with it before so I don't know. The instructions on this guide will be similar but I'm sure mainly in the install programs part, it will be a little different.</li>
+                </ul>
+            </li>
+            <li>Insert the USB Flash drive,SD Card to USB adapter, or DVD into the main computer.</li>
+            <li>Go to <a href="https://etcher.balena.io/" class="external">etcher.balena.io</a>, and download the software for whatever OS your main computer uses.
+                <ul>
+                    <li>If you're using a DVD, you do not need this software, you can just burn the iso to the dvd</li>
+                    <li>If you're using a android device, you can use the app ISO 2 USB</li></ul>
+            </li>
+            <li id="pt1sec1Step4">If you want to Install Ubuntu Server alongside whatever OS is still on the Server Computer, <button type="button" class="collapsible">You will have to do some preperation now. Click to see</button>
+                <div class="content">
+                    <p>To install Ubuntu Server alongside whatever OS is still on the Server Computer, you will have to shrink the partition that houses that OS</p>
+                    <h3>If the OS already installed is Windows:</h3>
+                    <ol>
+                        <li>Turn on the Server Computer, and log into your windows account.</li>
+                        <li>Open up &quot;Disk Management&quot; with admin. At the bottom in &quot;Disk 0&quot; right click the &quot;(C:)&quot; drive, and select &quot;Shrink Volume&quot;</li>
+                        <li>In the &quot;Enter the amount of space to srhink in MB, enter at the minimum &quot;32768&quot;, but if you want more storage for the server part, you can shrink it more.</li>
+                        <li>Click &quot;Shrink&quot; button.</li>
+                        <li>Right click the new &quot;Unallocated&quot; volume</li>
+                        <li>Select &quot;New Simple Volume&quot;</li>
+                        <li>Click next next until it asks to &quot;Assign Drive Letter or Path&quot; where you will check &quot;Do not assign a drive letter or drive path&quot; and select next.</li>
+                        <li>Set the file system to Fat32 or exfat, then click next and finish</li>
+                        <li>Close the app and continue the guide.</li>
+                    </ol>
+                    <h3>If the OS already installed is Mac or Linux or the Windows solution didn't work:</h3>
+                    <p>I'm not confident that this is the simplest solution, but if anyone knows a better way, please let me know.</p>
+                    <ol>
+                        <li>Go to <a class="external" href="https://ubuntu.com/download/desktop">ubuntu.com/download/desktop</a> and select Download</li>
+                        <li>If you're using a DVD skip to step 5</li>
+                        <li>Launch Etcher, select the Ubuntu Server ISO file, select the USB Flash drive, or SD Card to USB adapter, and hit Flash.</li>
+                        <li>Once it finishes, close the software and take the USB Flash drive, or SD Card to USB adapter out of the main computer.</li>
+                        <li>Insert the USB Flash drive, SD Card to USB adapter or DVD into the Server Computer.</li>
+                        <li>On the Server Computer Boot from the USB Flash drive, SD Card to USB adapter or DVD using BIOS or One time boot menu</li>
+                        <li>Select &quot;Try or install Ubuntu&quot;</li>
+                        <li>Once it finishes, go through the installation menu until you see &quot;Try ubuntu&quot; Select that and hit &quot;Close&quot;.</li>
+                        <li>At the bottom left hit the &quot;All Apps&quot; button, and open &quot;GParted&quot;</li>
+                        <li>Make sure at the top left your internal storage device is select.</li>
+                        <li>Right click the biggest size partition, and click &quot;Resize/Move&quot;</li>
+                        <li>Set &quot;Free space following (MiB):&quot; to 32768</li>
+                        <li>Click &quot;Resize/Move&quot;, and Click the Green checkmark at the top left.</li>
+                        <li>Click on the new square title &quot;Free space&quot; along with the rough amount of size you shrunk it by.</li>
+                        <li>Click the plus at the bottom left of the menu, and click next at the top right, and Create.</li>
+                        <li>Close the software and turn off the Server Computer, And follow with the guide.</li>
+                    </ol>
+                </div>
+                <ul><li>If you are using a DVD and don't want to install Ubuntu Server alongside whatever os is still on the Server Computer, <a href="#pt1sec2">skip to the next section.</a></li></ul>
+            </li>
+            <li>Launch Etcher, select the Ubuntu Server ISO file, select the USB Flash drive, or SD Card to USB adapter, and hit Flash.</li>
+            <li>Once it finishes, close the software and take the USB Flash drive, or SD Card to USB adapter out of the main computer.</li>
+        </ol>
+        <h3 id="pt1sec2">Section 2: Installing Linux</h3>
+        <ol>
+            <li>Turn off the server computer</li>
+            <li>Insert the USB Flash drive, SD Card to USB adapter or DVD into the Server Computer.</li>
+            <li>Turn on the Server computer, and open the One time boot menu or bios
+                <ul>
+                    <li>Usually you have to hold a key while the computer is turning on to get into this menu, to find this key, search up &quot;how to open one time boot menu on computer brand name/computer motherboard brand computers/motherboard&quot;, with the &quot;computer brand name/computer motherboard brand computers/motherboard&quot; replaced with whatever brand motherboard your Desktop has or whatever brand your laptop or prebuilt pc is.
+                        <br>or replace &quot;one time boot menu&quot; with bios, if your computer doesn't have a one time boot menu</li>
+                </ul>
+            </li>
+            <li>If you opened the One time boot menu, select the USB Flash drive, SD Card to USB adapter or DVD, if you opened the BIOS, you'll likely have to change the boot order, put the USB Flash drive, SD Card to USB adapter or DVD at the first spot, and then apply and restart. If done correctly it should open GNU GRUB</li>
+            <li>In the menu choose &quot;Try or install Ubuntu", it will probably flash a bunch of text on the screen, that is normal. Just let it do its thing and wait.</li>
+            <li>After a bit it should bring up the installer menus, just go through it, Choose your language, Choose your keyboard layout, Make sure Ubuntu Server is checked (NOT Ubuntu server (minimized), that can cause issues)</li>
+            <li>On the Network Configuration screen you will want to setup your internet
+                <ul>
+                    <li><strong>DO NOT SKIP SETTING UP YOUR INTERNET HERE</strong> If you continue without network it can sometimes fail to install, and if it does install, it will be really annoying to connect to internet later.</li>
+                    <li>If you're using Ethernet, just plug in the internet cord and it should work and change the option at the bottom to &quot;Done&quot;,</li>
+                    <li>If you're using Wi-Fi, use your arrowkeys and hit enter to select a network interface, then select &quot;Edit Wifi&quot;, &quot;Choose a visible network&quot;, Input the password for your Wi-Fi, And hit &quot;Save&quot;<br>The option at the bottom should change to &quot;Done&quot;</li>
+                </ul>
+            </li>
+            <li>Select &quot;Done&quot;, for this screen and the next, let the Mirror location finish it's test, afterwards select &quot;Done&quot;</li>
+            <li>If it prompts you to update the install, Select &quot;Update to the new installer&quot;</li>
+            <li>On the next screen you will configure how Ubuntu Server will be installed.
+                <ul>
+                    <li>If you would like to replace the entire hard drive with Ubuntu Server make sure &quot;Use entire disk&quot; is selected, then select &quot;Done&quot; at the bottom, and select &quot;Done&quot; on the next screen.</li>
+                    <li>If you would like to download Ubuntu Server alongside whatever OS you have installed currently then, 
+                        <ol><!--Make sure to go back up and fix the windows instructions, as it doesnt have the person format the 32 gigs-->
+                            <li>If you didn't already do the <a href="#pt1sec1Step4">preperation</a> needed for this, go do that first.</li>
+                            <li>Check &quot;Custom Storage Layout&quot;, and hit done.</li>
+                            <li>Select the partition formatted as either vfat or ext4 that is the same size as the new partition you made in the preperation.</li>
+                            <li>Select Edit, change the format to ext4, and mount is as &quot;/&quot;</li>
+                            <li>Select Done, and Continue</li>
+                        </ol>
+                    </li>
+                </ul>
+            </li>
+            <li>Fill in all the boxes - <strong>Please make sure you remember your username and password, when logging in you will not be given a list of users, and you will have to input the username exactly.</strong></li>
+            <li>Ubuntu Pro is not neccessary, you can skip it</li>
+            <li>Check &quot;Install OpenSSH Server&quot;, and select done.</li>
+            <li>None of the additional snaps are neccessary, you can just click done.</li>
+            <li>At this point the system should start installing! You can just sit back until it finishes.
+                <ul><li>If at this point it fails for some weird reason, try looking up the issue or just restart the installation section.</li></ul>
+            </li>
+            <li>Once it finishes it should give you the option to &quot;Reboot now&quot;, go ahead and select that.</li>
+        </ol>
+        <h3 id="pt1sec3">Section 3: Installing Software & Setting up</h3>
+        <p>In this section we will go over setting up and installing all the software required to host the minecraft server. Along with being able to remotely access the server from your Computer or Android device.
+            <br>A lot of these instructions will just be a instruction along with a text area, all you need to do on those steps is just run the command in the text area, the instruction is just to sorta help you understand what the command is doing.
+            <br>You will need to run each text area as a different command
+            <br>To paste things in the Windows command prompt terminal you just need to right click.
+        </p>
+        <ol>
+            <li>On your main computer, open up the Command prompt/Terminal</li>
+            <li>While the main computer is connected to the same internet as the server computer, SSH Into the server computer by running the command: 
+                <textarea>ssh username@serversName</textarea>
+                <ul>
+                    <li>The username is the username you chose during the installation, the server name is the &quot;Server's name&quot; you chose during installation, if you forgot the servers name just log in on the server computer, and it should show up after the username.</li>
+                    <li>On an Android device you will have to use the app &quot;Terminus&quot;</li>
+                    <li>If it doesn't work, running <span class="serif">&quot;hostname -I&quot;</span> on the server computer, and use that instead of the servers name in the ssh command.</li>
+                    <li>If windows says that isn't a real command, try using the program <a class="external" href="https://www.putty.org/">Putty</a></li>
+                </ul>
+            </li>
+            <li>It will likely mention some fingerprint thing, just say &quot;yes&quot;</li>
+            <li>To ensure you can SSH into the server in the future, enable the ssh systemd service<textarea>sudo systemctl enable ssh</textarea></li>
+            <li>Set your current user to the root account by running the following command
+                <textarea>sudo su root</textarea>
+                <ul><li>sudo command stands for &quot;Superuser do&quot; which lets you do any command whatsoever, to make sure no one bad is able to use this command, it will prompt you to input your password, just enter in the same password you used to log in.</li></ul>
+            </li>
+            <li>Add the Adoptium Temurin Java package repository
+                <ul><li>Remember! Run text area as a different command!</li><li>Remember! To paste a command in the windows command prompt you only have to right click</li></ul>
+                <textarea>apt install -y wget apt-transport-https gpg</textarea>
+                <textarea>wget -qO - https://packages.adoptium.net/artifactory/api/gpg/key/public | gpg --dearmor | tee /etc/apt/trusted.gpg.d/adoptium.gpg > /dev/null</textarea>
+                <textarea>echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list</textarea>
+            </li>
+            <li>Detatch from the root user, by clicking the keys &quot;CTRL+A+D&quot; all at once.</li>
+            <li>Update the repository cache
+                <textarea>sudo apt update</textarea>
+            </li>
+            <li>Install screen, Java Development kit 8, and nginx
+                <ul><li>If you don't plan on hosting your own EaglercraftX client or website you don't need nginx, and can remove it from the command if you want.</li></ul>
+                <textarea>sudo apt install screen temurin-8-jdk nginx</textarea>
+                <ul><li>If it prompts you to continue, just press y and enter</li></ul>
+            </li>
+            <li>Update all programs
+                <textarea>sudo apt upgrade</textarea>
+                <ul><li>To make sure your programs are always up to date, in the future whenever you want to update you can just run the command <textarea>sudo apt updatee && sudo apt upgrade</textarea></li></ul>
+            </li>
+            <li>Make a new user to run the server.
+                <textarea>sudo adduser ser-mc</textarea>
+                <ul>
+                    <li>It's important to have a different user account for game servers, because someone very talented could find a vulnerablity in the minecraft server that would let them run a linux command in the user hosting the server, they could only do the things that user can do, so if it was the root user then they could do whatever they want.</li>
+                    <li>Input a new password, and make sure to remember it</li>
+                    <li>On the full name, room number, work phone, etc. just press enter. Finish it off with confirming the information by entering in Y</li>
+                </ul>
+            </li>
+            <li>Set your user to the ser-mc user<textarea>sudo su ser-mc</textarea></li>
+            <li>Change directory to your home (~) directory<textarea>cd ~/</textarea></li>
+        </ol>
+        <h2 id="pt2">Part 2: Setting up the minecraft server</h2>
+        <p>Here we'll actually setup the minecraft part of the server.</p>
+        <h3 id="pt2sec1">Section 1: Creating the Waterfall server</h3>
+        <p>In this section you'll create the proxy server, which will manage players joining from EaglercraftX</p>
+        <ol>
+            <li>Make a directory that will hold the proxy server<textarea>mkdir eagProxy</textarea></li>
+            <li>Change directory to that new directory<textarea>cd ./eagProxy</textarea></li>
+            <li>Download the waterfall jar file
+                <textarea>wget -O waterfall.jar https://api.papermc.io/v2/projects/waterfall/versions/1.21/builds/579/downloads/waterfall-1.21-579.jar</textarea>
+                <ul><li>Waterfall is the software we'll be using to host the minecraft proxy server.</li></ul>
+            </li>
+            <li>Create a plugins folder<textarea>mkdir plugins</textarea></li>
+            <li>Change directory to the plugins folder<textarea>cd ./plugins</textarea></li>
+            <li>Download the EaglercraftXBungee jar file<textarea>wget https://git.eaglercraft.rip/eaglercraft/eaglercraft-builds/raw/branch/main/EaglercraftX_1.8_EaglerXBungee.jar</textarea></li>
+            <li>Go up a directory<textarea>cd ../</textarea></li>
+            <li>Make a testing .sh file<textarea>echo "screen -S eagP java -Xmx512M -jar waterfall.jar" | tee ./start.sh</textarea></li>
+            <li>Allow that .sh file to be ran<textarea>chmod +x start.sh</textarea></li>
+            <li>Run the .sh file to create all the files waterfall uses<textarea>./start.sh</textarea></li>
+            <li>Once it finishes just run the command<textarea>end</textarea></li>
+            <li>Open up the Nano text editor on the file config.yml
+                <textarea>nano ./config.yml</textarea>
+                <ul>
+                    <li>If you ever need to find a specific thing, you can do &quot;CTRL+W&quot; to search for it</li>
+                    <li>Change ip_forward to true</li>
+                    <li>Under &quot;servers:&quot; set the address to localhost:25564</li>
+                    <li>Under &quot;listeners:&quot; set query_port to 25565</li>
+                    <li>Right beneathe that change the motd to whatever you want
+                        <ul><li>The motd is the little text under the server name in the minecraft multiplayer menu</li><li>This text will only be visible to people on minecraft java edition.</li></ul>
+                    </li>
+                    <li>Under &quot;listeners:&quot; change host: to 0.0.0.0:25565</li>
+                    <li>right beneathe that Change the max_players to whatever number you want</li>
+                    <li>If you want, you can change online_mode to false
+                        <ul>
+                            <li>If you leave online mode to true, it will require your EaglercraftX players to first join the server on their legally purchased java minecraft account, and run the /eagler command, afterwards they're able to join on EaglercraftX with the same username.</li>
+                            <li>If you change online mode to false, it will allow anyone, including EaglercraftX players, to join the server without a legally purchased java minecraft account or authentication.</li>
+                        </ul>
+                    </li>
+                    <li>Edit any other setting you want in this file.</li>
+                </ul>
+            </li>
+            <li>When you are done do &quot;CTRL+O&quot; and enter to save, and &quot;CTRL+X&quot; to leave the editor.</li>
+            <li>Open the Nano text editor on the file listeners.yml inside the &quot;./plugins/EaglercraftXBungee/&quot; folder
+                <textarea>nano ./plugins/EaglercraftXBungee/listeners.yml</textarea>
+                <ul>
+                    <li>Edit the max_players to your liking</li>
+                    <li>Change the server_motd to whatever you want
+                        <ul><li>This motd will only be visible to EaglercraftX players</li></ul>
+                    </li>
+                    <li>Edit any other setting to your liking</li>
+                </ul>
+            </li>
+            <li>When you are done do &quot;CTRL+O&quot; and enter to save, and &quot;CTRL+X&quot; to leave the editor.</li>
+        </ol>
+        <h3 id="pt2sec2">Section 2: Creating the Minecraft Server</h3>
+        <p>In this section we'll actually create the minecraft server, where the world and main plugins will be held.</p>
+        <ol>
+            <li>Change directory back to the main home directory<textarea>cd ~/</textarea></li>
+            <li>Create the directory that will hold all the minecraft servers run by java version .8_EaglerXBungee
+                <textarea>mkdir mc8</textarea>
+                <ul>
+                    <li>Minecraft versions up to 1.16 Require Java 8, Minecraft versions 1.17-1.20 Require Java 17, 1.21 and newer require Java 21.
+                        <br>This is important because later in the guide we'll make an easy way to launch all the minecraft servers you want to host inside that folder, but if you put a newer version of minecraft in that folder it will mess up, so we have to seperate the minecraft servers into folders named after whatever version of java they use.
+                    </li>
+                </ul>
+            </li>
+            <li>Change directory to that new directory<textarea>cd ./mc8</textarea></li>
+            <li id="pt2sec2Step4">Make a new folder that will contain the eaglercraft minecraft server
+                <ul>
+                    <li>I would name this directory first starting with &quot;eag&quot; to show that itll be a eaglercraft server, and afterwards some description of the server, like for my server I name it &quot;eagNation2&quot; because as of writing this, the server is the second nation server.</li>
+                    <li>So in this situation, if you wanted to have a eaglercraft basic survival server, you could name it</li>
+                </ul>
+                <textarea>mkdir eagSurvival</textarea>
+            </li>
+            <li>Change directory to that new directory you just made
+                <ul><li>In this case change &quot;eagSurvival&quot; to whatever you named the directory in the last step.</li></ul>
+                <textarea>cd ./eagSurvival</textarea>
+            </li>
+            <li>Download PaperMC 1.8.8 minecraft server software
+                <textarea>wget -O server.jar https://api.papermc.io/v2/projects/paper/versions/1.8.8/builds/445/downloads/paper-1.8.8-445.jar</textarea>
+                <ul><li>PaperMC is a minecraft server software, that has general performace fixes, bug fixes, and allows you to use plugins on your server.</li></ul>
+            </li>
+            <li>Create a eula text file, showing that you have accepted the minecraft End User License agreement<textarea>echo "eula=true" | tee ./eula.txt</textarea></li>
+            <li>Create a testing .sh file to start the server<textarea>echo "screen -S eagS java -Xmx2G -Xms512M -jar server.jar" | tee ./start.sh</textarea></li>
+            <li>Allow that .sh file to be executable<textarea>chmod +x start.sh</textarea></li>
+            <li>Run the .sh file<textarea>./start.sh</textarea></li>
+            <li>Once it finishes starting the server run the command<textarea>stop</textarea></li>
+            <li>Open the Nano text editor on the file server.properties 
+                <textarea>nano ./server.properties</textarea>
+                <ul>
+                    <li>Change server-port to 25564</li>
+                    <li>Change online-mode to false, <strong>This is required, even if you left online mode to true earlier.</strong></li>
+                    <li>Change the max-players to your liking</li>
+                    <li>I'd suggest lowering the view-distance</li>
+                    <li>Make any other changes you want here.</li>
+                </ul>
+            </li>
+            <li>When you are done do &quot;CTRL+O&quot; and enter to save, and &quot;CTRL+X&quot; to leave the editor.</li>
+            <li>Open the Nano text editor on the file spigot.yml
+                <textarea>nano ./spigot.yml</textarea>
+                <ul><li>Set bungeecord: to true</li><li>Make any other changes you want here</li></ul>
+            </li>
+            <li>When you are done do &quot;CTRL+O&quot; and enter to save, and &quot;CTRL+X&quot; to leave the editor.</li>
+            <!--<li>Open the Nano text editor on a new file in the same directory called &quot;ram.txt&quot;</li>
+            <li>Paste this into the file
+                <div class="txtArea">
+-Xmx4G<br>
+-Xms512M
+                </div>
+                <ul><li>The -Xmx4G option specifies that the server will use 4 Gigabytes of ram, if all your hosting is a small server with friends I would keep this the same. If you cant use 4 Gigabytes of ram the lowest I would go to is 2G, if the server will be used by a lot of people you can change it to something higher, like 6G</li></ul>
+            </li>
+            having issues doing this, so ill have to omit it for now
+            -->
+        </ol>
+        <h3 id="pt2sec3">Section 3: Testing</h3>
+        <ol>
+            <li>Run the .sh file in that folder to start the server<textarea>./start.sh</textarea></li>
+            <li>If it launches perfectly fine, do &quot;CTRL+A+D&quot; to detatch from the server.</li>
+            <li>Change directory to the eagProxy folder in the home folder<textarea>cd ~/eagProxy</textarea></li>
+            <li>Run the .sh file in that folder to start the proxy server<textarea>./start.sh</textarea></li>
+            <li>On your main computer download the Offline EaglercraftX html file from <a class="external" href="https://git.eaglercraft.rip/eaglercraft/eaglercraft-builds/raw/branch/main/EaglercraftX_1.8_Offline_Signed_Client.html">git.eaglercraft.rip</a>
+                <ul>
+                    <li><strong>It is required to use the offline file, using something like the client hosted on this website will not work.</strong></li>
+                    <li>On the page just do &quot;CTRL+S&quot; to save the file.</li>
+                </ul>
+            </li>
+            <li>Open the file in your browser
+                <ul>
+                    <li>Simply double click it in the file browser, and it should open in your default browser</li>
+                    <li>Do <strong>NOT</strong> open it the same method we use to open them on the chromebooks, it is not neccessary, and will not work.</li>
+                </ul>
+            </li>
+            <li>Go to multiplayer, add a server with the ip &quot;serversName:8081&quot;
+                <ul><li>replace serversName with whatever you used in the ssh command.</li></ul>
+            </li>
+            <li>If it lets you in the server perfectly fine, then that is good!
+                <ul><li>If it doesn't let you into the server , try joining the server on normal java minecraft, with the ip &quot;serversName:25565&quot; and search up whatever error code it gives you. If it lets you in on java, try joining the <a class="external" href="https://discord.gg/ZJmT7aRrmh">eaglercraft discord server</a> and asking for help.</li></ul>
+            </li>
+            <li>Exit the minecraft server, and stop the proxy server by running the command
+                <textarea>end</textarea>
+                <ul><li>If you de-attacthed from the minecraft proxy server, just run the command <textarea>screen -r eagP to re-attatch to it</textarea></li></ul>
+            </li>
+            <li>Re-attatch to the minecraft paper server<textarea>screen -r eagS</textarea></li>
+            <li>Stop the server the server by running the command<textarea>stop</textarea></li>
+        </ol>
+        <h3 id="pt2sec4">Section 4: Systemd services for the Minecraft server</h3>
+        <p>In this section, we will be making Systemd services for the minecraft server, this will allow you to run the server in a much easier way, and allow the server to auto start whenever you turn on the server computer.</p>
+        <ol>
+            <li>Detatch from the ser-mc user by clicking &quot;CTRL+A+D&quot;</li>
+            <li>Open up the Nano text editor on a new file called &quot;eagP.service&quot; in the &quot;/etc/systemd/system/&quot; directory
+                <textarea>sudo nano /etc/systemd/system/eagp.service</textarea>
+                <ul><li>Notice how we needed the sudo part this time, thats because the /etc/systemd/system directory is a protected folder, and can only be accesed by root/superuser.</li></ul>
+            </li>
+            <li>Paste this into the file
+                <pre>[Unit]
+Description=Minecraft eaglercraft waterfall proxy
+After=network.target
+
+[Service]
+WorkingDirectory=/home/ser-mc/eagProxy/
+User=ser-mc
+Group=ser-mc
+Restart=on-failure
+TimeoutStopSec=10
+ExecStart=screen -DmS eagP java -Xmx512M -XX:+UseG1GC -XX:G1HeapRegionSize=4M -XX:+UnlockExperimentalVMOptions -XX:+ParallelRefProcEnabled -XX:+AlwaysPreTouch -XX:MaxInlineLevel=15 -jar waterfall.jar
+ExecStop=sleep 5
+ExecStop=screen -p 0 -S eagP -X eval 'stuff "stop"\015'
+
+[Install]
+WantedBy=multi-user.target
+</pre>
+            </li>
+            <li>When you are done do &quot;CTRL+O&quot; and enter to save, and &quot;CTRL+X&quot; to leave the editor.</li>
+            <li>Open up a Nano text editor session on a new file called &quot;mc8@.service&quot; in the &quot;/etc/systemd/system/&quot; directory<textarea>sudo nano /etc/systemd/system/mc8@.service</textarea></li>
+            <li>Paste this into the file
+<pre>[Unit]
+Description=Minecraft java 8 Server: %i
+After=network.target
+          
+[Service]
+WorkingDirectory=/home/ser-mc/mc8/%i
+        
+User=ser-mc
+Group=ser-mc
+     
+Restart=on-failure
+
+ExecStart=screen -DmS mc8-%i java <!--@ram.txt :mentioned in an earlier comment, having issues inputting options from files, so ill have to just do a basic way for now--> -Xms512M -Xmx4G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -jar server.jar
+
+ExecStop=screen -p 0 -S mc8-%i -X eval 'stuff "save-all"\015'
+ExecStop=screen -p 0 -S mc8-%i -X eval 'stuff "stop"\015'
+
+[Install]
+WantedBy=multi-user.target     
+</pre>
+                <ul><li>In the &quot;ExecStart=&quot; part, the &quot;-Xmx4G&quot; specifies that the minecraft server will use 4 Gigabytes of ram, which I suggest for a basic small friend server. But if you feel like the computer cant use that much ram, or the server can needs more ram, you can change it accordingly.</li></ul>
+            </li>
+            <li>Reload the systemd services<textarea>sudo systemctl daemon-reload</textarea></li>
+            <li>Start both server's systemd service
+                <textarea>sudo systemctl start eagp</textarea>
+                <textarea>sudo systemctl start mc8@eagSurvival</textarea>
+                <ul><li>eagSurvival will be replaced with whatever you named the directory containing the minecraft server in <a href="#pt2sec2Step4">section 2, step 4</a></li></ul>
+            </li>
+            <li>If you want the server to start whenever you turn on the server computer, enable the systemd services
+                <textarea>sudo systemctl enable eagp</textarea>
+                <textarea>sudo systectml enable mc8@eagSurvival</textarea>
+            </li>
+        </ol>
+        <p>Something important to note, when re-attatching to the minecraft server console, you will re-attach with 
+            <textarea rows="1">screen -r mc8-eagSurvival</textarea>
+            <ul>
+                <li>As mentioned before eagSurvival will be replaced with whatever you named the directory containing the minecraft server in <a href="#pt2sec2Step4">section 2, step 4</a></li>
+                <il>You can only re-attach to the console while on the ser-mc user.</il>
+            </ul>
+        </p>
+        <h3 id="pt2sec5">Section 5: Setting up others being able to join your server.</h3>
+        <p>Now that we have actually created the server, we need to make it so people using different internet can connect to your server. There are three methods I suggest.</p>
+        <button id="sec8Method1" type="button" class="collapsible largeButton">Method 1 Tunneling using Cloudflare</button>
+        <div class="content">
+            <p>The first method I suggest is tunneling with cloudflare. I suggest tunneling through cloudflare over the other options because</p>
+            <ul>
+                <li>It's tunneled so it doesn't leak your IP Address.</li>
+                <li>You can use any domain you have, so if you have a domain thats not blocked you can use it.</li>
+                <li>It allows you to create subdomains for your domain that let you tunnel other things like a EaglercraftX client, dynmap, or even a website.</li>
+                <li>All this for the low price of you needing to own your own domain, and thats it.</li>
+            </ul>
+            <h3>Cloudflare guide</h3>
+            <ol>
+                <li>Start by going to the <a href="https://www.cloudflare.com/" class="external">cloudflare website</a> and creating an account.</li>
+                <li>Once you've created an account, you'll want to go to your cloudflare dashboard and opent eh &quot;Websites&quot; tab.</li>
+                <li>Input your domain name in the textbox</li>
+                <li>Scroll to the bottom and select &quot;Free&quot;, then continue.</li>
+                <li>Follow the instructions in the page, including <a href="https://developers.cloudflare.com/dns/dnssec/#disable-dnssec" class="external">disabling DNSSEC on your domain</a> and adding the cloudflare name servers
+                    <ul>
+                        <li>On namecheap to add your cloudflare name servers, go to your namecheap dashboard.</li>
+                        <li>Click &quot;Manage&quot; on your purchased domain.</li>
+                        <li>Under &quot;NAMESERVERS&quot; set it to &quot;Custom DNS&quot; and add both assigned cloudflare name servers that you were given in the cloudflare page.</li>
+                        <li>Run the command below on the server computer, you can use SSH to do this.</li>
+                    </ul>
+                </li>
+                <li>Once the name servers are added, click &quot;Check nameservers now&quot; and wait for the email saying that your domain was accepted.</li>
+                <li>Once it finnally says your nameservers were accepted, go to the &quot;Zero trust&quot; tab on cloudflare and set that up for your cloudflare account.</li>
+                <li>On the Zero Trust dash board, go to the &quot;Networks&quot; tab, and select &quot;Create a tunnel&quot;</li>
+                <li>Select &quot;Cloudflared&quot; and hit next.</li>
+                <li>Name the tunnel some descriptive thing for your server computer, and hit Save tunnel.</li>
+                <li>Set the operating system to Debian, and the architecture to whatever architecture your server computer is, it is likely 64-bit.</li>
+                <li>Once you run the command switch to the &quot;Public Hostname&quot; tab, and select &quot;Add a punlic hostname&quot;</li>
+                <li>Set the domain to the domain you added before, and i'd suggest setting the subdomain to something like &quot;eag&quot; or &quot;ser&quot;</li>
+                <li>Set the type to HTTP, and the URL to &quot;localhost:8081&quot;</li>
+                <li>Select Save hostname.</li>
+                <li>Back on the server computer start the cloudflared systemd service.
+                    <textarea>sudo systemctl start cloudflared</textarea>
+                    <ul><li>If it doesn't let you exit, and says something like &quot;lines 1-20&quot; just hit the q key.</li></ul>
+                </li>
+                <li>If you want you can make this auto start by enabling the cloudflared systemd service.
+                    <textarea>sudo systemctl enable cloudflared</textarea>
+                </li>
+                <li>Open up eaglercraft and join the server using the link &quot;wss://cloudflare.domain&quot; with cloudflare.domain replaced with the link you just tunneled using cloudflare.</li>
+            </ol>
+        </div>
+        <button id="sec8Method2" type="button" class="collapsible largeButton">Method 2 Tunneling using ngrok</button>
+        <div class="content">
+            <p>If you can't pay for an unblocked domain you can use Ngrok as a option. Theres just some things you should know about ngrok</p>
+            <ul>
+                <li>ngrok is good because its tunneled, so it doesn't leak your IP Address.</li>
+                <li>With the free tier you can only use the ngrok domain, which is thankfully unblocked.</li>
+                <li>You can only tunnel one thing, which will be your server.</li>
+                <li>After a while of using it, they will start enforcing a 1 GB a month bandwith limit.</li>
+                <li>It's understandable, after all this service is 100% Free!</li>
+            </ul>
+            <h3>ngrok guide</h3>
+            <ol>
+                <li>Start by going to the <a href="https://ngrok.com/" class="external">ngrok website</a> and creating an account.</li>
+                <li>Follow the quick setup and installation</li>
+                <li>Run the command it gives you on the server computer using SSH to install ngrok</li>
+                <li>Run the command to add authentication</li>
+                <li>Switch to the static domain tab on the next part, and claim your static domain.</li>
+                <li>Open a nano session on the file ngrok.yml in the directory &quot;~/.config/ngrok/&quot;<textarea>nano ~/.config/ngrok/ngrok.yml</textarea></li>
+                <li>Add this to the bottom of the files
+                    <pre>
+endpoints:
+  - name: eagserver
+    url: yourNgrokDomain.ngrok-free.app
+    upstream:
+      url: 8081
+</pre>
+                    <ul><li>Replace &quot;yourNgrokDomain.ngrok-free.app&quot; with whatever domain ngrok put in the static domain box.</li></ul>
+                </li>
+                <li>Install that as a systemd service<textarea>sudo ngrok service install --config ~/.config/ngrok/ngrok.yml</textarea></li>
+                <li>Start the service<textarea>sudo systemctl start ngrok</textarea></li>
+                <li>If you want you can also make it start whenever the server computer turns on<textarea>sudo systemctl enable ngrok</textarea></li>
+                <li>Open up EaglercraftX and join the server using &quot;wss://yourNgrokDomain.ngrok-free.app&quot; but replace the yourNgrokDomain.ngrok-free.app with whatever you used before.</li>
+            </ol>
+            <p>IMPORTANT! Because you can't also host a client with ngrok, you will have to <a href="https://git.eaglercraft.rip/eaglercraft/eaglercraft-builds/raw/branch/main/EaglercraftX_1.8_Offline_Signed_Client.html" class="external">download a client file</a> and launch it using <a href="https://lagweird.codehs.me/file.html" class="external">lagweird.codehs.me/file.html</a></p>
+        </div>
+        <button id="sec8Method3" type="button" class="collapsible largeButton">Method 3 Port forwarding and using Caddy</button>
+        <div class="content">
+            <p>This last method uses a little software called Caddy, which lets you serve https data to your domains. Some things to know about Caddy</p>
+            <ul>
+                <li>Unlike the other options this is <strong>not</strong> tunneled, so if you share the domain caddy is connected to, your sorta sharing your IP</li>
+                <li>Instead of using tunneling, this method requires you to port forward!</li>
+                <li>That being said because it isn't tunneled it isn't reliant on any other services, aside from the domain.</li>
+                <li>You can use caddy for a Server, EaglercraftX Client, dynmap, and even a website!</li>
+                <li>All this requires is owning a domain of some kind that lets you make A records, so even a free subdomain from <a href="https://freedns.afraid.org/" class="external">freedns.afraid.org</a> will work.
+                    <br>Making this method essentially 100% free!</li>
+            </ul>
+            <h3>Caddy guide</h3>
+            <ol>
+                <li>Port forward port 8081 of the server computer on your router as the Internal and external port as both UDP and TCP
+                    <ul>
+                        <li>It's different for every router so I can't put insturctions here.</li>
+                        <li>If you need an internal ip you can do this command on the server computer to find it<textarea>hostname -I</textarea></li>
+                    </ul>
+                </li>
+                <li>Make an A record on your domain pointing to &quot;yourPublicIpAddress:8081&quot; with yourPublicIpAddress replaced with your public ip address
+                    <ul>
+                        <li>You can find your public ip address by visiting <a href="https://www.whatsmyip.org/" class="external">whatsmyip.org</a></li>
+                        <li>I'm not 100% sure that this is how you do this part as I cannot test this, so if by the end of this section it works or you find a way that works, please let me know so I can include your working method.</li>
+                    </ul>
+                </li>
+                <li>Install caddy by running these commands on the server computer using SSH
+                    <textarea>sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl</textarea>
+                    <textarea>curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg</textarea>
+                    <textarea>curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list</textarea>
+                    <textarea>sudo apt update</textarea>
+                    <textarea>sudo apt install caddy</textarea>
+                </li>
+                <li>Open up a nano session on your caddy file<textarea>sudo nano /etc/caddy/Caddyfile</textarea></li>
+                <li>Change all the text to match This
+<!--im just learning about pre, i wish i knew about this before this makes things so much easier!!!-->
+<pre># The Caddyfile is an easy way to configure your Caddy web server.
+#
+# Unless the file starts with a global options block, the first
+# uncommented line is always the address of your site.
+#
+# To use your own domain name (with automatic HTTPS), first make
+# sure your domain's A/AAAA DNS records are properly pointed to
+# this machine's public IP, then replace ":80" below with your
+# domain name.
+
+example.com {
+        # Set this path to your site's directory.
+        # root * /usr/share/caddy
+
+        # Enable the static file server.
+        # file_server
+
+        # Another common task is to set up a reverse proxy:
+        reverse_proxy localhost:8081
+
+        # Or serve a PHP site through php-fpm:
+        # php_fastcgi localhost:9000
+}
+
+# Refer to the Caddy docs for more information:
+# https://caddyserver.com/docs/caddyfile
+</pre>
+                    <ul><li>Replace &quot;example.com&quot; with whatever domain you have.</li></ul>
+                </li>
+                <li>Restart the caddy service<textarea>sudo systemctl restart caddy</textarea></li>
+                <li>Go to eaglercraftX and join a multiplayer server with the ip &quot;wss://example.com&quot; with example.com replaced with whatever domain you have.</li>
+            </ol>
+        </div>
+        <h2 id="pt3"><strong>OPTIONAL</strong> but still very suggsted Part 3: Extra things to add & know</h3>
+        <p>If you've done all in the guide that lead up to this point you should have a working server, but I suggest you look at this part of the guide where I'll explain some suggsted or good things to know about your server, such as how you can host your own EaglercraftX Client.</p>
+        <h3 id="pt3sec1">Section 1: I suggest adding an auth plugin to your server</h4>
+        <p>If you are running an offline mode server, anyone can set their username to your username, and use your stuff! So to protect it I suggest adding a auth plugin to your server.
+            <br>The authentication plugin I use is AuthMeReloaded, which is very simple to intstall onto your server.
+        </p>
+        <ol>
+            <li>On the server computer, while connected with SSH, set your user to ser-mc
+                <ul><li>If you're already in ser-mc, ignore this step</li></ul>
+                <textarea>sudo su ser-mc</textarea>
+            </li>
+            <li>Change directory to the minecraft server plugins folder
+                <textarea>cd ~/mc8/eagSurvival/plugins</textarea>
+                <ul><li>If you named the minecraft server directory something else, you'll replace eagSurvival with whatever you replaced it with</li></ul>
+            </li>
+            <li>Download AuthMeReloaded legacy jar<textarea>wget https://github.com/AuthMe/AuthMeReloaded/releases/download/5.6.0/AuthMe-5.6.0-legacy.jar</textarea></li>
+            <li>Restart the server, and the plugin will be there!</li>
+        </ol>
+        <h3 id="pt3sec2">Section 2: Tired of having to use the command line for handling file downloads and file editng?</h4>
+        <p>Don't worry! There's a simpler way! Using Secure File Transfer Protocol or SFTP for short. SFTP Allows you to upload, download, and even edit files on your server computer, and with little setup as openssh already works as a SFTP software!</p>
+        <p>On windows you can access your servers SFTP server using a <a href="https://winscp.net" class="external">program called WinSCP</a>.<br> Simply download the program, run the program, set the File protocol to SFTP, set the hostname to whatever you use in the ssh command, set the username to ser-mc, and the password to whatever you set the password for ser-mc to. Hit login and you can freely edit any files ser-mc can.</p>
+        <p>On linux you don't even need to download anything, in your file explorer set the directory to &quot;sftp://ser-mc@hostname&quot; with hostname replaced with whatever you use in the ssh command, and now you can edit any files ser-mc can.</p>
+        <p>The directory where all your server files will be is in &quot;/home/ser-mc&quot;</p>
+        <h3 id="pt3sec3">Section 3: Hosting a EaglercraftX client.</h3>
+        <p>This section will guide you on hosting an EaglercraftX client on your server computer for you and your players to use on chromebooks so they can join your server.
+            <br>If you used ngrok you cannot do this part. You need to install nginx for this method, if you don't already have nginx installed just run this command to install it<textarea>sudo apt install nginx</textarea>
+        </p>
+        <ol>
+            <li>On the server computer connected with SSH Set your user to root
+                <textarea>sudo su root</textarea>
+                <ul><li>To run sudo commands you need to be in the main account, if you are currently in the ser-mc account do &quot;CTRL+A+D&quot; to detach from it.</li></ul>
+            </li>
+            <li>Change directory to &quot;/var/www/html&quot; <textarea>cd /var/www/html</textarea></li>
+            <li>Download the latest eaglercraftX web build <textarea>wget https://git.eaglercraft.rip/eaglercraft/eaglercraft-builds/raw/branch/main/EaglercraftX_1.8_Web.zip</textarea></li>
+            <li>Install unzip<textarea>apt install unzip</textarea></li>
+            <li>Unzip the downloaded zip file<textarea>unzip EaglercraftX_1.8_Web.zip</textarea></li>
+            <li>Remove the zip file<textarea>rm ./EaglercraftX_1.8_Web.zip</textarea></li>
+            <li>Let other people access this website using your preferred method
+                <ul>
+                    <li>If you used cloudflare tunneling, create a new public hostname, with the Type set to &quot;HTTP&quot;, the URL set to &quot;localhost:80&quot;, and something to differ from the previous hostname you made.</li>
+                    <li>If you used caddy
+                        <ol>
+                            <li>Port forward port 80 of the server computer on your router as the Internal and external port as both UDP and TCP</li>
+                            <li>Make an A record on your domain pointing to &quot;yourPublicIpAddress:80&quot; with yourPublicIpAddress replaced with your public ip address</li>
+                            <li>In the caddyfile add a new section with this in it, replace &quot;example.com&quot; with a new domain <strong>IT CANNOT BE THE SAME DOMAIN YOU USED BEFORE</strong>
+                                <pre>
+example.com {
+    reverse_proxy localhost:80
+}
+</pre>
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
+            </li>
+            <li>Go to the domain and enjoy the client.</li>
+        </ol>
+        <p>Cool thing to note! The &quot;/var/www/html/&quot; directory is everything in your new website. If you wanted you can change the index.html there to your own website, and have it link to the client index.html one way or another. Just tinker around with it if you're interested.</p>
+        <br>
+        <h2>Congratulations, you've setup a working server</h2> 
+        <p>it wasnt so hard now was it? now you can enjoy it.</p>
+        <p>I need to go outside or work on homework because making this guide took so many hours of my life</p>
+    </main>
+    <footer><button class="styleToggle" id="styleToggle"></button></footer>
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/collapse.js"></script>
+    <script>
+        //I LOVE STACKOVERFLOW https://stackoverflow.com/questions/18455353/how-to-use-javascripts-setattribute-to-affect-multiple-elements
+        var els = document.querySelectorAll('textarea');
+        for (var i=0; i < els.length; i++) {
+            els[i].setAttribute("rows", "1");
+        }
+    </script>
+</body>
+</html>

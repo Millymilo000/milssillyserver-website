@@ -1,0 +1,51 @@
+/*i love ste-... borrowing code from proper wikis and not having to do work :D :D ;D*/
+.wikiIcons {
+    display: flex;
+    justify-content: center;
+    row-gap: 20px;
+}
+.wikiIcons div {
+  flex:0 0 auto;
+  width:90px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center
+}
+.wikiIcons div-img {
+  height:60px;
+  width:60px;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+.wikiIcons a {
+    color: white;
+    text-decoration: none;
+}
+.wikiIcons a:hover {
+    text-decoration: underline;
+}
+.msgBox {
+  width: auto;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: .4em .8em;
+  border-left: solid 5px rgb(255, 0, 0);
+  background: rgba(255, 0, 0, 0.274);
+  margin-bottom: 5px;
+}
+@media (max-width: 1000px) {
+  .msgBox {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+.msgBoxRed {
+  border-left: solid 5px rgb(255, 0, 0);
+  background: rgba(255, 0, 0, 0.274);
+}
+.msgBoxGreen {
+  border-left: solid 5px rgb(0, 255, 0);
+  background: rgba(0, 255, 0, 0.274);
+}

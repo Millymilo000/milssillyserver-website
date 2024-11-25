@@ -1,0 +1,29 @@
+.txtLeft {
+    display: flex;
+}
+.txtLeft br {
+    margin-bottom: 10px;
+}
+textarea {
+    width: 100%;
+    white-space: nowrap;
+}
+.txtArea {
+    background: white;
+    color: black;
+    width: 100%;
+    white-space: nowrap;
+    font-family: monospace;
+    overflow-x: scroll;
+    border: 3px gray;
+    margin: 2px 0px 2px 0px;
+}
+pre {
+    background: white;
+    color: black;
+    overflow-x: scroll;
+    width: 100%;
+}
+.setup {
+    width: 170%;
+}
