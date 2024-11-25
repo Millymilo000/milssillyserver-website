@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wiki - mils silly server</title>
+    <link rel="shortcut icon" href="../media/cat-ohmygodwhatthehell.ico" type="image/x-icon">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+    <link rel="stylesheet" href="../scripts/main.css">
+    <link rel="stylesheet" href="../scripts/wiki.css">
+    <link rel="stylesheet" href="../scripts/collapse.css">
+</head>
+<body>
+    <div class="topImg">&nbsp;</div>
+    <nav>
+        <div><a href="../index.html">Home</a></div>
+        <div><a id="map" href="#">Map</a></div>
+        <div><a href="../rules.html">Rules</a></div>
+        <div class="play"><a href="../play/index.html">Play!</a></div>
+        <div><a href="../blog.html">Blog</a></div>
+        <div><a href="index.html">Wiki</a></div>
+        <div><a href="../school.html">hi schools please click this</a></div>
+    </nav>
+    <br style="margin-top: 20px;">
+    <main>
+        <h1>Nation Diplomacy</h1>
+        <div class="msgBox msgBoxGreen"><strong>Work in progress</strong><br>hey there im still working on this page! more things will come in the future!</div>
+        <p>
+            In this Nation Server, when someone wants to begin a war they have to do that using Casus-Belli requests &lpar;CBs&rpar; and War requests.
+            <br>Currently the only way to create CB requests is using the <a id="discord" href="#">discord server</a>. But eventually I plan on creating a better way without the discord server.
+        </p>
+        <button type="button" class="collapsible largeButton toc">Contents</button>
+        <div class="content">
+            <ul>
+                <li><a href="#linking">Linking your Discord to your Minecraft username to use the Discord server</a></li>
+                <li><a href="#makingCbRequest">Making a CB request.</a></li>
+                <li><a href="#makingWarRequest">Making a War request</a></li>
+            </ul>
+        </div>
+        <h2 id="linking">Linking your Discord to your Minecraft username to use the Discord server</h2>
+        <p>Before making a request using discord you will need to link your Discord to your minecraft username on the server. It's a very simple and quick process.</p>
+        <ol>
+            <li>First join the discord server using this invite link <a id="discordInner"></a></li>
+            <li>Then run the command &quot;/discord link&quot;, 
+                <ul><li>it should give you a string of numbers, note the numbers down.</li></ul></li>
+            <li>Go back to the discord server, look in the members list and open Direct messages with the &quot;silly SRV&quot; bot.</li>
+            <li>Send the string of numbers that &quot;&sol;discord link&quot; gave you in step 2.</li>
+        </ol>
+        <p>Now you should be able to see all the channels!</p>
+        <h2 id="makingCbRequest">Making a CB request.</h2>
+        <ol>
+            <li>To start maing a CB Request, first navigate to the &quot;cb-requests&quot; channel.</li>
+            <li>Start writing out a new message with this format
+                <br>[Your nation] Nation name
+                <br>[Enemy nation] Enemy nation name
+                <br>[Casus-Belli] Casus Belli type
+                <br>[Evidence] Can be an image or whatever to prove that the enemy nation did that CB
+                <ul><li>You can create new lines by doing shift&plus;enter.</li></ul>
+            </li>
+            <li>Replace &quot;Nation name&quot; with the name of your nation.</li>
+            <li>Replace &quot;Enemy nation name&quot; with the name of the nation you are making this cb request on.
+                <ul><li>You can do &sol;f who &lt;username&gt; &lpar;Replacing &quot;&lt;username&gt;&quot; with the persons username&rpar; to find the name of the nation that person is in.</li></ul>
+            </li>
+            <li>Replace &quot;Casus Belli type&quot; with the type of casus belli you're doing.
+                <ul><li>You can find a list of these in the <a href="../rules.html#cb">rules page</a></li></ul>
+            </li>
+            <li>Replace &quot;Can be an image or whatever to prove that the enemy nation did that CB&quot; with whatever evidence you have to justify the Casus Belli request.
+                <br>This can be something like
+                <ul>
+                    <li>A message link to a message in the &quot;ingame-chat&quot; channel.</li>
+                    <li>An image with proof it's from the server.</li>
+                    <li>The time and place of when an event happened. &lpar;Only if it can be realisticly found from the logs, such as a block break, or entity kill.&rpar;</li>
+                </ul>
+            </li>
+            <li>Once you've filled out all the neccessary stuff, just send the message and wait for a staff member to see it.</li>
+        </ol>
+        <p>Once a staff member sees the CB request, they'll send a message saying whether it was accepted or denied, and sometimes a thread may be made to discuss some things before it's accepted or denied.
+            <br>Once it's accepted you have usually 2 weeks to make a war request using that CB.
+        </p>
+        <h2 id="makingWarRequest">Making a War Request</h2>
+        <ol>
+            <li>To start making a War request, first navigate to the &quot;wars&quot; channel.</li>
+            <li>Start writing out a new message with this format
+                <br>[Your nation] Nation name
+                <br>[Enemy nation] Enemy nation name
+                <br>[Casus-Belli used] Message link to cb request 
+            </li>
+            <li>Replace &quot;Nation name&quot; with the name of your nation.</li>
+            <li>Replace &quot;Enemy nation name&quot; with the name of the nation you are making this cb request on.</li>
+            <li>Replace &quot;Message link to cb request&quot; with a message link to the accepted CB Request you are using to justify this war.
+                <ul><li>You can grab the message link by right clicking or clicking the &quot;More&quot; button when hovering over a message, and selecting the &quot;Copy Message Link&quot; button.</li></ul>
+            </li>
+            <li>Once you've filled out all the neccessary stuff, just send the message and wait for a staff member to see it.</li>
+            <li>Once a staff member accepts the War request, a thread will be made on the channel, where you will need to discuss when the war will start.</li>
+            <li>After the war is ended, in that same thread the winning nation will have to send all their post-war actions, once they are checked and accepted by a staff member, the losing nation will have to follow along with those post-war actions.</li>
+        </ol>
+    </main>
+    <footer><button class="styleToggle" id="styleToggle"></button></footer>
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/collapse.js"></script>
+</body>
+</html>

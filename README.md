@@ -10,6 +10,6 @@ Sorry for the horrible github page, will probably update in the future.
 
 ## some things to know about this when you're reading the code
 The eagler ip, java ip, map link, and form link are all in a data.json file in the scripts folder which gets read and replaces the empty spots. That json file isn't in the repository to somewhat hide the original website for this. please don't add that stuff back.
-If you want to reference those stuff, look at the top of `scripts/main.js`
+If you want to reference those stuff, create a <a> tag with one of the ids in `scripts/main.js`
 
 Please don't break the barely mobile support this has, and the light/dark mode support that this has.
