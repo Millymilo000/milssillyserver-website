@@ -12,3 +12,4 @@ The eagler ip, java ip, map link, and form link are all in a data.json file in t
 If you want to reference those stuff, create a <a> tag with one of the ids in `scripts/main.js`
 
 Please don't break the barely mobile support this has, and the light/dark mode support that this has.
+skibidi toilet test
