@@ -44,7 +44,7 @@ footer {
     z-index: -9;
     left: 0;
 }
-[data-theme="light"] .topImg {
+[data-theme="light"] .topImg { /*These heights have to be the same as their background image*/
     height: 540px;
     background-image: url("../media/lightModeTop.png");
 }
