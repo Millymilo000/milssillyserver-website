@@ -56,14 +56,26 @@ var els = document.querySelectorAll('.external');
 toggle between hiding and showing the dropdown content */
 function dropdown() {
     document.getElementById("navDropdown").classList.toggle("show");
-  }
+}
   
-  // Close the dropdown if the user clicks outside of it
-  window.onclick = function(e) {
-    if (!e.target.matches('.dropButton')) {
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+if (!e.target.matches('.dropButton')) {
     var navDropdown = document.getElementById("navDropdown");
-      if (navDropdown.classList.contains('show')) {
-        navDropdown.classList.remove('show');
-      }
+        if (navDropdown.classList.contains('show')) {
+            navDropdown.classList.remove('show');
+        }
     }
-  }
+}
+
+//thanks stackoverflow comment https://stackoverflow.com/questions/4793604/how-to-insert-an-element-after-another-element-in-javascript-without-using-a-lib
+// I now can enjoy doing less work and editing less files :D
+function insertAfter(referenceNode, newNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
+
+var el = document.createElement("a");
+el.innerHTML = "EaglercraftX WASM &lpar;1.8, EXPERIMENTAL!!&rpar;";
+el.href = "/playXWASM/index.html"
+var div = document.getElementById("navDropdown");
+insertAfter(div.lastChild, el);
