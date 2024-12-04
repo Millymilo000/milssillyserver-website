@@ -65,7 +65,10 @@ nav {
     width: 75%;
     margin: auto;
 }
-nav div {
+.navItem {
+    color:inherit;
+    text-decoration: inherit;
+    font-size: 18pt;
     height: 80px;
     margin: auto;
     width: 110px;
@@ -75,11 +78,19 @@ nav div {
     background-color: var(--blugry);
     border: 2px solid var(--blugry);
     border-radius: 25px;
+    position: relative;
 }
-nav a {
-    color:inherit;
-    text-decoration: inherit;
-    font-size: 18pt;
+nav a:not(.dropdown a), .dropButton { /*thank you "sitepoint community" https://www.sitepoint.com/community/t/how-to-make-a-div-a-clickable-link/108895*/
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-decoration: none; /* No underlines on the link */
+    z-index: 9; /* Places the link above everything else in the div */
+    background-color: #FFF; /* Fix to make div clickable in IE */
+    opacity: 0; /* Fix to make div clickable in IE */
+    filter: alpha(opacity=1); /* Fix to make div clickable in IE */
 }
 a {
     color: #d1e3ff;
@@ -87,14 +98,21 @@ a {
 span a {
     color: inherit;
 }
-.play {
+.play, .playOther {
     height: 90px;
-    width: 140px;
     background-color: lightgreen;
     border-color: lightgreen;
-}
-.play a {
     font-size: 40pt;
+}
+.play {
+    width: 140px;
+    border-radius: 25px 0px 0px 25px;
+    margin-right: 1px;
+}
+.playOther {
+    width: fit-content;
+    border-radius: 0px 25px 25px 0px;
+    margin-left: 1px;
 }
 .underline {
     text-decoration: underline;
@@ -144,4 +162,56 @@ table, th, td {
 }
 main > img {
     max-width: 90%;
+}
+
+.dropdownContent a:first-child::after { /* Remove this once 1.12 gets added*/
+    content: " (Not added yet, just links to 1.8)";
+}
+
+/* thank you w3 schools https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_dropdown_navbar_click */
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropButton {
+    cursor: pointer;
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: white;
+    /* padding: 14px 16px; */
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropButton, .dropButton:focus {
+    background-color: red;
+}
+
+.dropdownContent {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdownContent a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdownContent a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
 }

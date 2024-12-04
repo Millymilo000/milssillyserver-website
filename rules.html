@@ -15,13 +15,20 @@
 <body>
     <div class="topImg">&nbsp;</div>
     <nav>
-        <div><a href="index.html">Home</a></div>
-        <div><a id="map" href="#">Map</a></div>
-        <div><a href="#">Rules</a></div>
-        <div class="play"><a href="play/index.html">Play!</a></div>
-        <div><a href="blog.html">Blog</a></div>
-        <div><a href="wiki/">Wiki</a></div>
-        <div><a href="school.html">hi schools please click this</a></div>
+        <div class="navItem"><a href="index.html"></a>Home</div>
+        <div class="navItem"><a id="map" href="#"></a>Map</div>
+        <div class="navItem"><a href="rules.html"></a>Rules</div>
+        <div class="play navItem"><a href="play/index.html"></a>Play!</div>
+        <div class="dropdown">
+            <div class="playOther navItem"><a class="dropButton" href="javascript:dropdown()"></a>&dtrif;</div>
+            <div class="dropdownContent" id="navDropdown">
+              <a href="play/index.html">Eaglercraft 1.12</a>
+              <a href="playX/index.html">EaglercraftX &lpar;1.8&rpar;</a>
+            </div>
+            </div> 
+        <div class="navItem"><a href="blog.html"></a>Blog</div>
+        <div class="navItem"><a href="wiki/"></a>Wiki</div>
+        <div class="navItem"><a href="school.html"></a>hi schools please click this</div>
     </nav>
     <br style="margin-top: 20px;">
     <main>
@@ -85,10 +92,10 @@
     </ol>
     <h2 id="faction">Faction Rules</h2>
     <ol start="11">
-        <li>Factions that are inactive for too long will be disbanded.</li>
-        <li>Factions that intend on mimicking IRL genocidal governments, or oppressive regimes. Are not allowed.</li>
+        <li>Nations that are inactive for too long will be disbanded.</li>
+        <li>Nations that intend on mimicking IRL genocidal governments, or oppressive regimes. Are not allowed.</li>
         <li>Joke names/joke countries are disallowed.</li>
-        <li>Factions cannot be named any real world countries that are currently in a conflict.
+        <li>Nations cannot be named any real world countries that are currently in a conflict.
             <ul>
                 <li>Just to avoid any awkward situations. Such as if a faction named Russia went to war to take land owned by a faction named Ukraine we would have an awkward situation that we want to avoid.</li>
             </ul>
@@ -106,7 +113,12 @@
         </li>
         <li>Colonies (claims that are separated from the mainland of a faction) are limited to 1 colony for every 2 members, with the max number of colonies being 4.</li>
         <li>Large sea claims are not allowed.</li>
-        <li>Small claims that serve no purpose, or used only for a warp are not allowed.</li>
+        <li id="r20">1 Person nations are not allowed
+            <ul>
+                <li>If a nation is found to only have 1 member after 4 days of the nation being created, it will be disbanded.</li>
+                <li>If you break this rule 2 times, you will be banned from creating new factions for 60 days.</li>
+            </ul>
+        </li>
     </ol>
     <p>If you have a invalid claim, I will notify you of it, and if you don't fix it after 3 days I will remove it.</p>
     <h2 id="war">War Rules</h2>
