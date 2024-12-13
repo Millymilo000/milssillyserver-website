@@ -6,7 +6,17 @@
     <title>homepage - mils silly server</title>
     <link rel="shortcut icon" href="media/cat-ohmygodwhatthehell.ico" type="image/x-icon">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+    <link rel="stylesheet" href="scripts/collapse.css">
     <link rel="stylesheet" href="scripts/main.css">
+    <style>
+        .centerText, .mainPageText p {
+            text-align: center;
+        }
+        .center {
+           display: block;
+           margin: auto;
+        }
+    </style>
 </head>
 <body>
     <div class="topImg"></div>
@@ -31,11 +41,21 @@
     <h1>hi there welcome to the homepage for my silly minecraft server!</h1>
     <p>Hi, I host a minecraft server intended for everyone in my school district to enjoy minecraft while we're finished with our school work, or just whenever we have the free time to enjoy.
         <br>It is joinable using EaglercraftX and I provide a client to do so. IP: <span id="eaglerIP"></span>
-        <br>It is also joinable through Minecraft Java 1.8.8 using the IP: <span id="javaIP"></span></p>
-    <p>Interested in joining? If you're in the same district as me then fill this form <a class="external" id="formInner" href="#"></a> &lpar;<strong>You need to be signed into your school email</strong>, if you are and it lets you into the form you are in the same district as me&rpar;</p>
-    <p>We have a discord for the members in the server! If you are a player on the minecraft server you can join here <a class="external" id="discordInner" href="#"></a></p>
-    <p>I made a guide on how to host a eaglercraftX server the same way I host this one, if that interests you go ahead and <a href="guide/index.html">take a look</a></p>
-    <p>Want to contribute to the site? <a class="external" href="https://github.com/Millymilo000/milssillyserver-website">We have a github of the site now!</a></p>
+        <br>It is also joinable through Minecraft Java 1.8.8 using the IP: <span id="javaIP"></span>
+    </p>
+    <button type="button" class="collapsible center">Get whitelisted on the server</button>
+    <div class="content centerText">
+        <p>
+            <strong>Sorry if your request doesn't get accepted, we are getting a lot of requests, and don't have an efficient way of accepting them yet!</strong>
+            <br>Fill out this form <a class="external" id="formInner" href="#"></a> to make a join request to get whitelisted
+            <br>You have to be signed into your school account to fill it, and be in the same school district as me. If it lets you in the form then you are in the same district as me.
+        </p>
+    </div>
+    <span class="mainPageText">
+    <p><a id="discord" href="#">Join the discord server! <a class="external" id="discordInner" href="#"></a></a></p>
+    <p><a href="guide/index.html">Want to learn how to make a server just like this? Go to the guide!</a></p>
+    <p><a class="external" href="https://github.com/Millymilo000/milssillyserver-website">Want to contribute to the site? Go to the github repository!</a></p>
+    </span>
     <p><strong>IF YOU'RE EXPERIENCING ANY BUGS WITH THE BUTTONS OR CSS, RESET YOUR CACHE BY DOING SHIFT+RELOAD, OR CTRL+F5. IF THAT STILL DOESN'T WORK GO TO <a href="scripts/main.js">scripts/main.js</a> AND <a href="scripts/main.css">scripts/main.css</a> AND DO SHIFT+RELOAD OR CTRL+F5 THERE.</strong></p>
     <hr>
     <h2>Latest Announcements/Blog posts</h2>
@@ -60,5 +80,6 @@
     </main>
     <footer><button class="styleToggle" id="styleToggle"></button></footer>
     <script src="scripts/main.js"></script>
+    <script src="scripts/collapse.js"></script>
 </body>
 </html>
